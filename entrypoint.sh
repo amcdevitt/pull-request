@@ -19,6 +19,8 @@ fi
 
 DESTINATION_BRANCH="${INPUT_DESTINATION_BRANCH:-"master"}"
 
+git config --global --add safe.directory /__w/$GITHUB_REPOSITORY/$GITHUB_REPOSITORY
+
 # Github actions no longer auto set the username and GITHUB_TOKEN
 git remote set-url origin "https://$GITHUB_ACTOR:$GITHUB_TOKEN@${GITHUB_SERVER_URL#https://}/$GITHUB_REPOSITORY"
 
