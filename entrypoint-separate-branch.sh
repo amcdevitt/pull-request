@@ -44,7 +44,7 @@ if [[ "$LINES_CHANGED" = "0" ]] && [[ ! "$INPUT_PR_ALLOW_EMPTY" ==  "true" ]]; t
 fi
 
 # Create a new branch for the PR based on the original source branch
-MERGE_BRANCH="${INPUT_MERGE_BRANCH:-"merge-branch"}"
+MERGE_BRANCH="${INPUT_PR_MERGE_BRANCH:-"merge-branch"}"
 git checkout -b $MERGE_BRANCH origin/$SOURCE_BRANCH
 
 # Change the upstream branch to the destination branch

@@ -39,6 +39,9 @@ inputs:
   pr_allow_empty:
     description: Create PR even if no changes
     required: false
+  pr_merge_branch:
+    description: The branch name to use for merging
+    required: false
   github_token:
     description: GitHub token secret
     required: true
