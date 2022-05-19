@@ -24,9 +24,10 @@ git config --global --add safe.directory /github/workspace
 
 # Github actions no longer auto set the username and GITHUB_TOKEN
 git remote set-url origin "https://$GITHUB_ACTOR:$GITHUB_TOKEN@${GITHUB_SERVER_URL#https://}/$GITHUB_REPOSITORY"
+git remote -v
 
 # Pull all branches references down locally so subsequent commands can see them
-git fetch origin '+refs/heads/*:refs/heads/*' --update-head-ok
+git fetch
 
 # Print out all branches
 git --no-pager branch -a -vv
@@ -46,6 +47,7 @@ fi
 # Create a new branch for the PR based on the original source branch
 MERGE_BRANCH="${INPUT_PR_MERGE_BRANCH:-"merge-branch"}"
 git checkout -b $MERGE_BRANCH origin/$SOURCE_BRANCH
+git pull
 
 # Change the upstream branch to the destination branch
 git branch -u origin/$DESTINATION_BRANCH
