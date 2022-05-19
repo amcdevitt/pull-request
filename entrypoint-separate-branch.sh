@@ -52,17 +52,9 @@ git branch -u origin/$DESTINATION_BRANCH
 
 # Rebase the new source branch onto the destination branch
 git rebase || true
+git rebase --abort || true
 
-(git rebase --show-current-patch) || true
-CURRENTLY_REBASING=$?
-echo "CURRENTLY_REBASING (exit code): $CURRENTLY_REBASING"
-
-if [ $CURRENTLY_REBASING -ne 0 ]; then
-  echo "Need to manually resolve conflicts.  Aborting Rebase."
-  git rebase --abort
-fi
-
-git push origin $MERGE_BRANCH
+git push origin $MERGE_BRANCH -f
 
 # Workaround for `hub` auth error https://github.com/github/hub/issues/2149#issuecomment-513214342
 export GITHUB_USER="$GITHUB_ACTOR"
