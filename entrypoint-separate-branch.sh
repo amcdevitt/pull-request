@@ -51,7 +51,7 @@ git checkout -b $MERGE_BRANCH origin/$SOURCE_BRANCH
 git branch -u origin/$DESTINATION_BRANCH
 
 # Rebase the new source branch onto the destination branch
-git rebase
+git rebase || true
 
 (git rebase --show-current-patch) || true
 CURRENTLY_REBASING=$?
