@@ -51,6 +51,8 @@ echo "Creating a new branch for the PR: $MERGE_BRANCH"
 echo "Original Source branch: $SOURCE_BRANCH"
 echo "Original Destination branch: $DESTINATION_BRANCH"
 
+git branch -D "$MERGE_BRANCH" || true
+
 git fetch origin
 git checkout -b $MERGE_BRANCH origin/$SOURCE_BRANCH
 git pull
