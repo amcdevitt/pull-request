@@ -60,6 +60,9 @@ git pull
 git status
 
 echo "********************************************************************************"
+echo "git config"
+git config --list
+echo "********************************************************************************"
 # Change the upstream branch to the destination branch
 git branch -u origin/$DESTINATION_BRANCH
 git status
@@ -136,9 +139,8 @@ git fetch origin
 git checkout -b temp_branch origin/$DESTINATION_BRANCH
 git branch -D "$MERGE_BRANCH" || true
 git checkout -b $MERGE_BRANCH origin/$MERGE_BRANCH
-#git branch -u origin/$DESTINATION_BRANCH
-git merge $DESTINATION_BRANCH --ff-only
+git branch -u origin/$DESTINATION_BRANCH
 git status
-#git rebase
-#git status
+git rebase
+git status
 git push origin $MERGE_BRANCH -f
