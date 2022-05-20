@@ -133,6 +133,7 @@ fi
 
 echo "Attempting second rebase to fix merge conflicts"
 git fetch origin
+git branch -D "$MERGE_BRANCH" || true
 git checkout -b $MERGE_BRANCH origin/$MERGE_BRANCH
 git branch -u origin/$DESTINATION_BRANCH
 git status
