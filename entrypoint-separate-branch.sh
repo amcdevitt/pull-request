@@ -47,15 +47,26 @@ fi
 # Create a new branch for the PR based on the original source branch
 MERGE_BRANCH="${INPUT_PR_MERGE_BRANCH:-"merge-branch"}"
 
+echo "Creating a new branch for the PR: $MERGE_BRANCH"
+echo "Original Source branch: $SOURCE_BRANCH"
+echo "Original Destination branch: $DESTINATION_BRANCH"
+
 git fetch origin
 git checkout -b $MERGE_BRANCH origin/$SOURCE_BRANCH
 git pull
 
+git status
+
+echo "********************************************************************************"
 # Change the upstream branch to the destination branch
 git branch -u origin/$DESTINATION_BRANCH
+git status
+
+echo "Commits to be rebased:"
+git log origin/$DESTINATION_BRANCH..HEAD --oneline
 
 # Rebase the new source branch onto the destination branch
-git rebase || true
+git pull --rebase || true
 git rebase --abort || true
 
 git push origin $MERGE_BRANCH -f
