@@ -71,7 +71,7 @@ echo "Commits to be rebased:"
 echo $(git log origin/$DESTINATION_BRANCH..HEAD --oneline)
 
 # Rebase the new source branch onto the destination branch
-git pull --rebase || true
+git rebase -X theirs || true
 git rebase --abort || true
 
 git push origin $MERGE_BRANCH -f
