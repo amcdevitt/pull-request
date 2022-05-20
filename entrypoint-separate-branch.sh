@@ -140,14 +140,3 @@ if [[ "$LINES_CHANGED" = "0" ]]; then
 else
   echo "::set-output name=has_changed_files::true"
 fi
-
-echo "Attempting second rebase to fix merge conflicts"
-git fetch origin
-git checkout -b temp_branch origin/$DESTINATION_BRANCH
-git branch -D "$MERGE_BRANCH" || true
-git checkout -b $MERGE_BRANCH origin/$MERGE_BRANCH
-git branch -u origin/$DESTINATION_BRANCH
-git status
-git rebase
-git status
-git push origin $MERGE_BRANCH -f
