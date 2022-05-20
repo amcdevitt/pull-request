@@ -17,6 +17,13 @@ else
   exit 1
 fi
 
+echo "********************************************************************************"
+echo "Git Version: $(git --version)"
+echo "********************************************************************************"
+echo "git config"
+git config --list
+echo "********************************************************************************"
+
 DESTINATION_BRANCH="${INPUT_DESTINATION_BRANCH:-"master"}"
 
 # Fix for the unsafe repo error: https://github.com/repo-sync/pull-request/issues/84
@@ -59,10 +66,7 @@ git pull
 
 git status
 
-echo "********************************************************************************"
-echo "git config"
-git config --list
-echo "********************************************************************************"
+
 # Change the upstream branch to the destination branch
 git branch -u origin/$DESTINATION_BRANCH
 git status
