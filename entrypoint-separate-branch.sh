@@ -21,6 +21,9 @@ echo "**************************************************************************
 echo "Git Version: $(git --version)"
 echo "********************************************************************************"
 echo "git config"
+AUTHOR_EMAIL=$(cat "$GITHUB_EVENT_PATH" | jq '.head_commit.author.email' | sed 's/"//g')
+git config --global user.name "$GITHUB_ACTOR"
+git config --global user.email "$AUTHOR_EMAIL"
 git config --list
 echo "********************************************************************************"
 
