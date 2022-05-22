@@ -65,7 +65,6 @@ git branch -D "$MERGE_BRANCH" || true
 
 git fetch origin
 git checkout -b $MERGE_BRANCH origin/$SOURCE_BRANCH
-git pull
 
 git status
 
@@ -74,7 +73,7 @@ git branch -u origin/$DESTINATION_BRANCH
 git status
 
 echo "Commits to be rebased:"
-echo $(git log origin/$DESTINATION_BRANCH..HEAD --oneline)
+git log origin/$DESTINATION_BRANCH..HEAD --oneline
 
 # Rebase the new source branch onto the destination branch
 git rebase || true
