@@ -70,14 +70,16 @@ git pull
 git status
 
 # Change the upstream branch to the destination branch
-#git branch -u origin/$DESTINATION_BRANCH
+git branch -u origin/$DESTINATION_BRANCH
 git status
 
 echo "Commits to be rebased:"
 echo $(git log origin/$DESTINATION_BRANCH..HEAD --oneline)
 
 # Rebase the new source branch onto the destination branch
-git rebase -X theirs origin/$DESTINATION_BRANCH || true
+git rebase || true
+
+# Immediately abort. We cannot automatically continue rebasing if there are conflicts.
 git rebase --abort || true
 
 git push origin $MERGE_BRANCH -f
