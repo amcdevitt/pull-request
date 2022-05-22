@@ -67,6 +67,7 @@ jobs:
         pr_draft: true                                    # Creates pull request as draft
         pr_allow_empty: true                              # Creates pull request even if there are no changes
         pr_merge_branch: "merge-branch"                   # Branch to create to attempt a rebase and create a pull request from
+        pr_rebase_strat: "-X theirs"                         # rebase strategy, one of "theirs", "ours", "merge".  Adds "-X <strategy>" to git rebase command
         github_token: ${{ secrets.GITHUB_TOKEN }}
 ```
 

@@ -42,6 +42,9 @@ inputs:
   pr_merge_branch:
     description: The branch name to use for merging
     required: false
+  pr_rebase_strat:
+    description: The rebase strategy to use for merging
+    required: false
   github_token:
     description: GitHub token secret
     required: true

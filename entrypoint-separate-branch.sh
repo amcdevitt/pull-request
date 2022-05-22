@@ -76,7 +76,8 @@ echo "Commits to be rebased:"
 git log origin/$DESTINATION_BRANCH..HEAD --oneline
 
 # Rebase the new source branch onto the destination branch
-git rebase || true
+REBASE_STRATEGY="${INPUT_PR_REBASE_STRAT:-""}"
+git rebase ${REBASE_STRATEGY} || true
 
 # Immediately abort. We cannot automatically continue rebasing if there are conflicts.
 git rebase --abort || true
