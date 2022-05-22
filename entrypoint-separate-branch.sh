@@ -17,6 +17,9 @@ else
   exit 1
 fi
 
+# Workaround for `hub` auth error https://github.com/github/hub/issues/2149#issuecomment-513214342
+export GITHUB_USER="$GITHUB_ACTOR"
+
 echo "********************************************************************************"
 echo "Git Version: $(git --version)"
 echo "********************************************************************************"
@@ -77,15 +80,13 @@ git log origin/$DESTINATION_BRANCH..HEAD --oneline
 
 # Rebase the new source branch onto the destination branch
 REBASE_STRATEGY="${INPUT_PR_REBASE_STRAT:-""}"
+echo "Running Command: git rebase ${REBASE_STRATEGY}"
 git rebase ${REBASE_STRATEGY} || true
 
 # Immediately abort. We cannot automatically continue rebasing if there are conflicts.
 git rebase --abort || true
 
 git push origin $MERGE_BRANCH -f
-
-# Workaround for `hub` auth error https://github.com/github/hub/issues/2149#issuecomment-513214342
-export GITHUB_USER="$GITHUB_ACTOR"
 
 PR_ARG="$INPUT_PR_TITLE"
 if [[ ! -z "$PR_ARG" ]]; then
