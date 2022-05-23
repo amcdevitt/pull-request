@@ -17,9 +17,6 @@ else
   exit 1
 fi
 
-# Workaround for `hub` auth error https://github.com/github/hub/issues/2149#issuecomment-513214342
-export GITHUB_USER="$GITHUB_ACTOR"
-
 echo "********************************************************************************"
 echo "Git Version: $(git --version)"
 echo "********************************************************************************"
@@ -87,6 +84,9 @@ git rebase ${REBASE_STRATEGY} || true
 git rebase --abort || true
 
 git push origin $MERGE_BRANCH -f
+
+# Workaround for `hub` auth error https://github.com/github/hub/issues/2149#issuecomment-513214342
+export GITHUB_USER="$GITHUB_ACTOR"
 
 PR_ARG="$INPUT_PR_TITLE"
 if [[ ! -z "$PR_ARG" ]]; then
